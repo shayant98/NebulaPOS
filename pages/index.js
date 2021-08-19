@@ -1,14 +1,18 @@
-import React from "react";
-import LoginForm from "../components/LoginForm/LoginForm";
+import Receipt from "../components/Receipt/Receipt";
 
-const Home = () => {
+import CategoryCard from "../components/CategoryCard/CategoryCard";
+const home = () => {
   return (
-    <div className="w-screen h-screen bg-red-400 ">
-      <div className="flex justify-center items-center w-full h-full">
-        <LoginForm />
+    <div className="w-screen h-screen ">
+      <div className="h-15 w-full bg-green-400"></div>
+      <div className="grid grid-cols-12">
+        <div className="col-span-10 border-r  border-blue-400 ">
+          <CategoryCard />
+        </div>
+        <Receipt />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default home;

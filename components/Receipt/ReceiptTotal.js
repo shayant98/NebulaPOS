@@ -2,7 +2,7 @@ import React from "react";
 
 const ReceiptTotal = () => {
   return (
-    <div class="flex-none ">
+    <div className="flex-none ">
       <div className="flex flex-col">
         <div className="  p-5 w-full border-b border-blue-400">
           <div className="grid grid-cols-2">

@@ -1,14 +1,14 @@
 version: "3.1"
 services:
-  mongo:
-    image: mongo
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
-      - 27017:27017
+      - 3307:3306
     volumes:
-      - mongo-db:/data/db
+      - persistance:/app/data
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
 volumes:
-  mongo-db:
+  persistance:
