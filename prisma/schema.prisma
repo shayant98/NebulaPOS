@@ -11,27 +11,72 @@ model Category {
   id          Int       @id @default(autoincrement())
   name        String
   description String
+  image       String    @default("")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   products    Product[]
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  price       Int
-  category_id Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  category    Category @relation(fields: [category_id], references: [id])
-  orders      Orders[]
+  id                 Int               @id @default(autoincrement())
+  name               String
+  price              Float
+  category_id        Int
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  category           Category          @relation(fields: [category_id], references: [id])
+  product_variations productVariants[]
+  order_products     OrderProducts[]
 }
 
 model Orders {
-  id         Int      @id @default(autoincrement())
-  order_nr   String   @unique @default(cuid())
-  date       DateTime @default(now())
-  location   String?
+  id           Int      @id @default(autoincrement())
+  order_nr     String   @unique @default(cuid())
+  date         DateTime @default(now())
+  payment_type String?
+  item_total   Float
+  order_total  Float
+  order_tax    Float
+
+
+  order_products OrderProducts[]
+}
+
+model OrderProducts {
+  id         Int     @id @default(autoincrement())
+  order_id   Int
   product_id Int
-  product    Product  @relation(fields: [product_id], references: [id])
+  qty        int
+  product    Product @relation(fields: [product_id], references: [id])
+  order      Orders  @relation(fields: [order_id], references: [id])
+}
+
+model Variations {
+  id           Int               @id @default(autoincrement())
+  varient_name String
+  varient      VariationValues[]
+}
+
+model VariationValues {
+  id              Int              @id @default(autoincrement())
+  varient_id      Int
+  varient         Variations       @relation(fields: [varient_id], references: [id])
+  varient_value   String
+  product_details ProductDetails[]
+}
+
+model productVariants {
+  id              Int             @id @default(autoincrement())
+  sku             String
+  product_id      Int
+  product         Product         @relation(fields: [product_id], references: [id])
+  product_details ProductDetails?
+}
+
+model ProductDetails {
+  id                    Int             @id @default(autoincrement())
+  product_variations_id Int
+  variation_value_id    Int
+  product_variations    productVariants @relation(fields: [product_variations_id], references: [id])
+  variation_value       VariationValues @relation(fields: [variation_value_id], references: [id])
 }

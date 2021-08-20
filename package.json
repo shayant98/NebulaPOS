@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
     "@next-auth/prisma-adapter": "^0.5.4",
     "@prisma/client": "^2.29.1",
     "axios": "^0.21.1",
@@ -14,7 +15,11 @@
     "next-auth": "^3.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.12.2"
+    "react-hook-form": "^7.12.2",
+    "react-icons": "^4.2.0",
+    "react-query": "^3.19.6",
+    "react-table": "^7.7.0",
+    "react-toastify": "^7.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",

@@ -7,6 +7,9 @@ const getCategoryById = async ({ query: { id } }, res) => {
     where: {
       id: Number(id),
     },
+    include: {
+      products: true,
+    },
   });
   res.status(200).json(category);
 };

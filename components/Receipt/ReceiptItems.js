@@ -1,27 +1,18 @@
 import React from "react";
+import { useReceipt } from "../../context/ReceiptContext";
+import ReceiptItem from "./ReceiptItem";
 
 const ReceiptItems = () => {
+  const {
+    receipt: { receiptItems },
+    addItem,
+    removeItem,
+  } = useReceipt();
+
   return (
     <div className="flex-grow p-4 overflow-y-auto">
       <h3 className="text-3xl ">Receipt</h3>
-      <div className="flex bg-gray-100 p-4 w-full space-x-4 rounded-lg mt-2 items-center">
-        <p className="font-bold text-lg mr-10">1</p>
-        <span>x</span>
-        <p className=" flex-grow font-normal overflow-hidden overflow-ellipsis text-lg">Broeken </p>
-        <p className="font-bold text-3xl mr-10">$60</p>
-      </div>
-      <div className="flex bg-gray-100 p-4 w-full space-x-4 rounded-lg mt-2 items-center">
-        <p className="font-bold text-lg mr-10">1</p>
-        <span>x</span>
-        <p className=" flex-grow font-normal overflow-hidden overflow-ellipsis text-lg">Broeken </p>
-        <p className="font-bold text-3xl mr-10">$60</p>
-      </div>
-      <div className="flex bg-gray-100 p-4 w-full space-x-4 rounded-lg mt-2 items-center">
-        <p className="font-bold text-lg mr-10">1</p>
-        <span>x</span>
-        <p className=" flex-grow font-normal overflow-hidden overflow-ellipsis text-lg">Broeken </p>
-        <p className="font-bold text-3xl mr-10">$60</p>
-      </div>
+      {receiptItems.length > 0 ? receiptItems.map((item, index) => <ReceiptItem key={index} item={item} />) : <p className="mt-5">No products selected</p>}
     </div>
   );
 };
