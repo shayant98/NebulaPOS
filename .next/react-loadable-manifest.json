@@ -1,4 +1,8 @@
 {
+  "../components/Table/Table.js -> react-data-table-component": {
+    "id": "./node_modules/react-data-table-component/dist/index.cjs.js",
+    "files": []
+  },
   "../node_modules/next/dist/client/next-dev.js -> ./dev/noop": {
     "id": "./node_modules/next/dist/client/dev/noop.js",
     "files": [

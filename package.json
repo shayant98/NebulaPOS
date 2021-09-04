@@ -13,13 +13,17 @@
     "bson": "^4.4.1",
     "next": "latest",
     "next-auth": "^3.28.0",
+    "next-themes": "0.0.15",
     "react": "^17.0.2",
+    "react-data-table-component": "^6.11.8",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.12.2",
     "react-icons": "^4.2.0",
     "react-query": "^3.19.6",
+    "react-simple-wysiwyg": "^1.0.2",
     "react-table": "^7.7.0",
-    "react-toastify": "^7.0.4"
+    "react-toastify": "^7.0.4",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",

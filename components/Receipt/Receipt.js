@@ -1,11 +1,10 @@
 import React from "react";
-import { useTheme } from "../../context/ThemeProvider";
 import ReceiptItems from "./ReceiptItems";
 import ReceiptTotal from "./ReceiptTotal";
 
 const Receipt = () => {
   return (
-    <div className={`h-screen col-span-2`}>
+    <div className={`col-span-4`}>
       <div className="flex flex-col h-full">
         <ReceiptItems />
         <ReceiptTotal />

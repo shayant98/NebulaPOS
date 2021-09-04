@@ -9,10 +9,19 @@ const handler = async (req, res) => {
 };
 
 const getOrderByOrderNr = async (id, res) => {
-  const order = await prisma.orders.findMany({
+  const order = await prisma.orders.findFirst({
+    where: {
+      order_nr: id,
+    },
     include: {
-      product: true,
+      order_products: {
+        include: {
+          product: true,
+        },
+      },
     },
   });
   res.status(200).json(order);
 };
+
+export default handler;

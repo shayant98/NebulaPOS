@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useReceipt } from "../../context/ReceiptContext";
-import { useTheme } from "../../context/ThemeProvider";
 import PaymentModal from "../PaymentModal/PaymentModal";
 
 const ReceiptTotal = () => {
@@ -9,9 +8,8 @@ const ReceiptTotal = () => {
   const {
     receipt: { total, subTotal, tax },
   } = useReceipt();
-  const { isDarkMode } = useTheme();
   return (
-    <div className={`flex-none m-5 p-5 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"} rounded-xl shadow`}>
+    <div className={`bg-gray-100 dark:bg-gray-900 flex-none m-5 p-5  rounded-xl shadow`}>
       <div className="flex flex-col">
         <div className="  p-5 w-full ">
           <div className="grid grid-cols-2">

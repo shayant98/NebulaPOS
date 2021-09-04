@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 export const ReceiptContext = createContext();
 const ReceiptItemRemoveContext = createContext();
+const ReceiptClearContext = createContext();
 const ReceiptItemAddContext = createContext();
 
 export function ReceiptProvider({ children }) {
@@ -59,18 +60,35 @@ export function ReceiptProvider({ children }) {
   };
 
   const calculateTotal = (subTotal) => {
-    setTotal(subTotal + tax);
+    if (subTotal > 0) {
+      setTotal((subTotal + tax).toFixed(2));
+    } else {
+      setTotal(0);
+    }
+  };
+
+  const clearReceipt = () => {
+    setReceiptItems([]);
+    setSubTotal(0);
+    setTotal(0);
   };
 
   return (
     <ReceiptContext.Provider value={{ receiptItems, subTotal, total, tax }}>
       <ReceiptItemRemoveContext.Provider value={removeItem}>
-        <ReceiptItemAddContext.Provider value={addItem}>{children}</ReceiptItemAddContext.Provider>
+        <ReceiptClearContext.Provider value={clearReceipt}>
+          <ReceiptItemAddContext.Provider value={addItem}>{children}</ReceiptItemAddContext.Provider>
+        </ReceiptClearContext.Provider>
       </ReceiptItemRemoveContext.Provider>
     </ReceiptContext.Provider>
   );
 }
 
 export const useReceipt = () => {
-  return { receipt: useContext(ReceiptContext), addItem: useContext(ReceiptItemAddContext), removeItem: useContext(ReceiptItemRemoveContext) };
+  return {
+    receipt: useContext(ReceiptContext),
+    addItem: useContext(ReceiptItemAddContext),
+    removeItem: useContext(ReceiptItemRemoveContext),
+    clearReceipt: useContext(ReceiptClearContext),
+  };
 };
