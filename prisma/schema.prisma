@@ -18,19 +18,20 @@ model Category {
 }
 
 model Product {
-  id             Int             @id @default(autoincrement())
-  name           String
-  price          Float
-  quantity       Int
-  description    String          @db.Text
-  image          String?
-  category_id    Int
-  brand_id       Int?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  category       Category        @relation(fields: [category_id], references: [id])
-  order_products OrderProducts[]
-  Brands         Brands?         @relation(fields: [brand_id], references: [id])
+  id              Int              @id @default(autoincrement())
+  name            String
+  price           Float
+  quantity        Int
+  description     String           @db.Text
+  image           String?
+  category_id     Int
+  brand_id        Int?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  category        Category         @relation(fields: [category_id], references: [id])
+  order_products  OrderProducts[]
+  refund_products RefundProducts[]
+  Brands          Brands?          @relation(fields: [brand_id], references: [id])
 }
 
 model Brands {
@@ -52,13 +53,12 @@ model Orders {
 }
 
 model OrderProducts {
-  id         Int       @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   order_id   Int?
   product_id Int?
   qty        Int
-  product    Product?  @relation(fields: [product_id], references: [id])
-  order      Orders?   @relation(fields: [order_id], references: [id])
-  Refunds    Refunds[]
+  product    Product? @relation(fields: [product_id], references: [id])
+  order      Orders?  @relation(fields: [order_id], references: [id])
 }
 
 model RefundTypes {
@@ -68,15 +68,23 @@ model RefundTypes {
 }
 
 model Refunds {
-  id               Int           @id @default(autoincrement())
-  refund_request   DateTime      @default(now())
+  id               Int              @id @default(autoincrement())
+  refund_request   DateTime         @default(now())
   ammount_refunded Float
   refund_type      Int
   order_id         Int
-  order_product_id Int
-  order            Orders        @relation(fields: [order_id], references: [id])
-  order_products   OrderProducts @relation(fields: [order_product_id], references: [id])
-  refund_type_id   RefundTypes   @relation(fields: [refund_type], references: [id])
+  order            Orders           @relation(fields: [order_id], references: [id])
+  refund_type_id   RefundTypes      @relation(fields: [refund_type], references: [id])
+  refund_products  RefundProducts[]
+}
+
+model RefundProducts {
+  id         Int     @id @default(autoincrement())
+  refund_id  Int
+  product_id Int
+  qty        Int
+  refund     Refunds @relation(fields: [refund_id], references: [id])
+  product    Product @relation(fields: [product_id], references: [id])
 
 }
 

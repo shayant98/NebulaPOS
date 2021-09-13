@@ -5,11 +5,7 @@ const prisma = new PrismaClient();
 const getAllProducts = async (req, res) => {
   const products = await prisma.product.findMany({
     include: {
-      product_variations: {
-        include: {
-          ProductDetails: true,
-        },
-      },
+      Brands: true,
     },
   });
   res.status(200).json(products);
