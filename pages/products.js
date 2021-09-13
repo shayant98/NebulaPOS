@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { useState } from "react";
 import PageContainer from "../components/PageContainer/PageContainer";
-import ProductDetails from "../components/ProductDetails/ProductDetails";
 import ProductsTable from "../components/ProductsTable/ProductsTable";
+import ProductDetails from "../modules/products/ProductDetails/ProductDetails";
 
 export async function getServerSideProps(context) {
   const prisma = new PrismaClient();

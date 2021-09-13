@@ -7,7 +7,7 @@ function orders({ orders }) {
 export async function getServerSideProps(ctx) {
   const prisma = new PrismaClient();
 
-  const orders = await prisma.orders.findMany();
+  const orders = await prisma.orders.findMany({ select: { order_nr } });
   prisma.$disconnect;
 
   return {

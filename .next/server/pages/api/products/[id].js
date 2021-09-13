@@ -1,0 +1,46 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/api/products/[id]";
+exports.ids = ["pages/api/products/[id]"];
+exports.modules = {
+
+/***/ "./pages/api/products/[id].js":
+/*!************************************!*\
+  !*** ./pages/api/products/[id].js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _prisma_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @prisma/client */ \"@prisma/client\");\n/* harmony import */ var _prisma_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_prisma_client__WEBPACK_IMPORTED_MODULE_0__);\n\nconst prisma = new _prisma_client__WEBPACK_IMPORTED_MODULE_0__.PrismaClient();\n\nconst handler = async (req, res) => {\n  if (req.method === \"GET\") {\n    getProductById(req, res);\n  }\n\n  if (req.method === \"PUT\") {\n    updateProduct(req, res);\n  }\n\n  if (req.method === \"DELETE\") {\n    deleteProduct(req, res);\n  }\n};\n\nconst getProductById = async ({\n  query: {\n    id\n  }\n}, res) => {\n  const product = await prisma.product.findFirst({\n    where: {\n      id: Number(id)\n    },\n    include: {\n      category: true,\n      Brands: true\n    }\n  });\n  res.status(200).json(product);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handler);\n\nconst updateProduct = async (req, res) => {\n  const body = req.body;\n\n  try {\n    const updatedProduct = await prisma.product.update({\n      where: {\n        id: body.id\n      },\n      data: {\n        name: body.name,\n        price: Number(body.price),\n        description: body.description,\n        quantity: Number(body.qty)\n      }\n    });\n    res.status(200).json(updatedProduct);\n  } catch (error) {\n    res.status(500).json({\n      message: \"Failed to update product\"\n    });\n  }\n};\n\nconst deleteProduct = async ({\n  query: {\n    id\n  }\n}, res) => {\n  try {\n    await prisma.product.delete({\n      where: {\n        id: Number(id)\n      }\n    });\n    res.status(200).json({\n      message: \"successfully deleted\"\n    });\n  } catch (error) {\n    res.status(500).json({\n      message: \"Failed to delete product\"\n    });\n    console.log(error);\n  }\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,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YyxNQUFKLENBQVcsR0FBWCxFQUFnQkMsSUFBaEIsQ0FBcUI7QUFBRVcsTUFBQUEsT0FBTyxFQUFFO0FBQVgsS0FBckI7QUFDRCxHQVBELENBT0UsT0FBT0QsS0FBUCxFQUFjO0FBQ2R6QixJQUFBQSxHQUFHLENBQUNjLE1BQUosQ0FBVyxHQUFYLEVBQWdCQyxJQUFoQixDQUFxQjtBQUFFVyxNQUFBQSxPQUFPLEVBQUU7QUFBWCxLQUFyQjtBQUNBRSxJQUFBQSxPQUFPLENBQUNDLEdBQVIsQ0FBWUosS0FBWjtBQUNEO0FBQ0YsQ0FaRCIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3BhZ2VzL2FwaS9wcm9kdWN0cy9baWRdLmpzP2ZiNGUiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUHJpc21hQ2xpZW50IH0gZnJvbSBcIkBwcmlzbWEvY2xpZW50XCI7XG5cbmNvbnN0IHByaXNtYSA9IG5ldyBQcmlzbWFDbGllbnQoKTtcblxuY29uc3QgaGFuZGxlciA9IGFzeW5jIChyZXEsIHJlcykgPT4ge1xuICBpZiAocmVxLm1ldGhvZCA9PT0gXCJHRVRcIikge1xuICAgIGdldFByb2R1Y3RCeUlkKHJlcSwgcmVzKTtcbiAgfVxuICBpZiAocmVxLm1ldGhvZCA9PT0gXCJQVVRcIikge1xuICAgIHVwZGF0ZVByb2R1Y3QocmVxLCByZXMpO1xuICB9XG4gIGlmIChyZXEubWV0aG9kID09PSBcIkRFTEVURVwiKSB7XG4gICAgZGVsZXRlUHJvZHVjdChyZXEsIHJlcyk7XG4gIH1cbn07XG5cbmNvbnN0IGdldFByb2R1Y3RCeUlkID0gYXN5bmMgKHsgcXVlcnk6IHsgaWQgfSB9LCByZXMpID0+IHtcbiAgY29uc3QgcHJvZHVjdCA9IGF3YWl0IHByaXNtYS5wcm9kdWN0LmZpbmRGaXJzdCh7XG4gICAgd2hlcmU6IHtcbiAgICAgIGlkOiBOdW1iZXIoaWQpLFxuICAgIH0sXG4gICAgaW5jbHVkZToge1xuICAgICAgY2F0ZWdvcnk6IHRydWUsXG4gICAgICBCcmFuZHM6IHRydWUsXG4gICAgfSxcbiAgfSk7XG4gIHJlcy5zdGF0dXMoMjAwKS5qc29uKHByb2R1Y3QpO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgaGFuZGxlcjtcblxuY29uc3QgdXBkYXRlUHJvZHVjdCA9IGFzeW5jIChyZXEsIHJlcykgPT4ge1xuICBjb25zdCBib2R5ID0gcmVxLmJvZHk7XG5cbiAgdHJ5IHtcbiAgICBjb25zdCB1cGRhdGVkUHJvZHVjdCA9IGF3YWl0IHByaXNtYS5wcm9kdWN0LnVwZGF0ZSh7XG4gICAgICB3aGVyZToge1xuICAgICAgICBpZDogYm9keS5pZCxcbiAgICAgIH0sXG4gICAgICBkYXRhOiB7XG4gICAgICAgIG5hbWU6IGJvZHkubmFtZSxcbiAgICAgICAgcHJpY2U6IE51bWJlcihib2R5LnByaWNlKSxcbiAgICAgICAgZGVzY3JpcHRpb246IGJvZHkuZGVzY3JpcHRpb24sXG4gICAgICAgIHF1YW50aXR5OiBOdW1iZXIoYm9keS5xdHkpLFxuICAgICAgfSxcbiAgICB9KTtcblxuICAgIHJlcy5zdGF0dXMoMjAwKS5qc29uKHVwZGF0ZWRQcm9kdWN0KTtcbiAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICByZXMuc3RhdHVzKDUwMCkuanNvbih7IG1lc3NhZ2U6IFwiRmFpbGVkIHRvIHVwZGF0ZSBwcm9kdWN0XCIgfSk7XG4gIH1cbn07XG5cbmNvbnN0IGRlbGV0ZVByb2R1Y3QgPSBhc3luYyAoeyBxdWVyeTogeyBpZCB9IH0sIHJlcykgPT4ge1xuICB0cnkge1xuICAgIGF3YWl0IHByaXNtYS5wcm9kdWN0LmRlbGV0ZSh7XG4gICAgICB3aGVyZToge1xuICAgICAgICBpZDogTnVtYmVyKGlkKSxcbiAgICAgIH0sXG4gICAgfSk7XG4gICAgcmVzLnN0YXR1cygyMDApLmpzb24oeyBtZXNzYWdlOiBcInN1Y2Nlc3NmdWxseSBkZWxldGVkXCIgfSk7XG4gIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgcmVzLnN0YXR1cyg1MDApLmpzb24oeyBtZXNzYWdlOiBcIkZhaWxlZCB0byBkZWxldGUgcHJvZHVjdFwiIH0pO1xuICAgIGNvbnNvbGUubG9nKGVycm9yKTtcbiAgfVxufTtcbiJdLCJuYW1lcyI6WyJQcmlzbWFDbGllbnQiLCJwcmlzbWEiLCJoYW5kbGVyIiwicmVxIiwicmVzIiwibWV0aG9kIiwiZ2V0UHJvZHVjdEJ5SWQiLCJ1cGRhdGVQcm9kdWN0IiwiZGVsZXRlUHJvZHVjdCIsInF1ZXJ5IiwiaWQiLCJwcm9kdWN0IiwiZmluZEZpcnN0Iiwid2hlcmUiLCJOdW1iZXIiLCJpbmNsdWRlIiwiY2F0ZWdvcnkiLCJCcmFuZHMiLCJzdGF0dXMiLCJqc29uIiwiYm9keSIsInVwZGF0ZWRQcm9kdWN0IiwidXBkYXRlIiwiZGF0YSIsIm5hbWUiLCJwcmljZSIsImRlc2NyaXB0aW9uIiwicXVhbnRpdHkiLCJxdHkiLCJlcnJvciIsIm1lc3NhZ2UiLCJkZWxldGUiLCJjb25zb2xlIiwibG9nIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./pages/api/products/[id].js\n");
+
+/***/ }),
+
+/***/ "@prisma/client":
+/*!*********************************!*\
+  !*** external "@prisma/client" ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = require("@prisma/client");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = (__webpack_exec__("./pages/api/products/[id].js"));
+module.exports = __webpack_exports__;
+
+})();

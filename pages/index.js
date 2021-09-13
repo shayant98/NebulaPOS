@@ -1,12 +1,10 @@
-import Receipt from "../components/Receipt/Receipt";
 import { PrismaClient } from "@prisma/client";
-import Input from "../components/input/Input";
-import Categories from "../components/Categories/Categories";
 import { useState } from "react";
-import ProductModel from "../components/ProductModal/ProductModal";
-
+import ProductModel from "../modules/home/ProductModal/ProductModal";
 import PageContainer from "../components/PageContainer/PageContainer";
 import { getSession } from "next-auth/client";
+import Categories from "../modules/home/Categories/Categories";
+import Receipt from "../modules/home/Receipt/Receipt";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -46,7 +44,7 @@ const home = ({ categories }) => {
       <div className="grid md:grid-cols-8 2xl:grid-cols-12">
         <div className="md:col-span-6 2xl:col-span-8">
           <div className="p-10">
-            <Input placeholder="Zoek naar producten" />
+            {/* <Input placeholder="Zoek naar producten" /> */}
             <Categories categories={categories} setCurrentCategory={setCurrentCategory} setshowProductModal={setshowProductModal} />
           </div>
         </div>
