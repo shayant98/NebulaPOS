@@ -3,11 +3,10 @@ import dynamic from "next/dynamic";
 import { useMemo } from "react";
 
 import { createTheme } from "react-data-table-component";
-import { toast } from "react-toastify";
 const DataTable = dynamic(() => import("react-data-table-component"), {
   ssr: false,
 });
-const Table = ({ data, columns, onClick, onSelectedRowsChange, subHeaderComponent, selectableRows = false }) => {
+const Table = ({ data, columns, onClick, subHeaderComponent, selectableRows = false }) => {
   const { theme } = useTheme();
   createTheme("dark", {
     text: {
@@ -31,11 +30,18 @@ const Table = ({ data, columns, onClick, onSelectedRowsChange, subHeaderComponen
     },
   });
 
+  const handleChange = useMemo(
+    () => (state) => {
+      // You can use setState or dispatch with something like Redux so we can use the retrieved data
+      console.log("Selected Rows: ", state.selectedRows);
+    },
+    []
+  );
+
   return (
     <DataTable
       selectableRows={selectableRows}
-      onSelectedRowsChange={onSelectedRowsChange}
-      re
+      onSelectedRowsChange={handleChange}
       theme={theme === "dark" ? "dark" : "default"}
       noHeader
       subHeader

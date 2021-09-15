@@ -10,11 +10,7 @@ const ProductsTable = ({ products, onClick }) => {
   const [filter, setFilter] = useState("");
   const filteredItems = products.filter((item) => item.name && item.name.toLowerCase().includes(filter.toLowerCase()));
 
-  const subHeaderComponentMemo = useMemo(() => {
-    return <Input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Search products" icon={<AiOutlineSearch className="text-gray-400" size={24} />} />;
-  }, [filter]);
-
-  return <Table subHeaderComponent={subHeaderComponentMemo} onClick={onClick} pointerOnHover columns={[{ name: "NAME", sortable: true, selector: "name" }]} data={filteredItems} />;
+  return <Table onClick={onClick} pointerOnHover columns={[{ name: "NAME", sortable: true, selector: "name" }]} data={filteredItems} />;
 };
 
 export default ProductsTable;
