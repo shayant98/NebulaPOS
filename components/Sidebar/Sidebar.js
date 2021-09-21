@@ -11,6 +11,7 @@ const Sidebar = () => {
     { name: "Register", link: "/", icon: <AiOutlineShopping size={24} /> },
     { name: "Products", link: "products", icon: <AiOutlineSkin size={24} /> },
     { name: "Refund", link: "refund", icon: <AiOutlineUndo size={24} /> },
+    { name: "Orders", link: "orders", icon: <AiOutlineUndo size={24} /> },
   ];
 
   return (
