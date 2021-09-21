@@ -86,6 +86,7 @@ model Customers {
   surname        String
   birthday       DateTime
   loyalty_number String   @unique
+  loyalty_credit Float
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

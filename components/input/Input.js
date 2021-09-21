@@ -1,6 +1,7 @@
 import React from "react";
 import { DefaultEditor } from "react-simple-wysiwyg";
-const Input = ({ placeholder, type = "text", title, icon, onChange, value, name, varient = "" }) => {
+import InputMask from "react-input-mask";
+const Input = ({ placeholder, type = "text", title, icon, onChange, value, name, varient = "", mask = "" }) => {
   return (
     <div className="">
       <label className="">{title}</label>
@@ -8,7 +9,10 @@ const Input = ({ placeholder, type = "text", title, icon, onChange, value, name,
         {icon}
         {varient === "" ? (
           <input name={name} className="bg-gray-100 outline-none w-full" type={type} placeholder={placeholder} onChange={onChange} value={value} />
+        ) : varient === "masked" && mask !== "" ? (
+          <InputMask className="bg-gray-100 outline-none w-full" mask={mask} value={value} onChange={onChange} />
         ) : (
+          // <input name={name} className="bg-gray-100 outline-none w-full" type={type} placeholder={placeholder} onChange={onChange} value={value} />
           <DefaultEditor name={name} className="bg-gray-100 outline-none w-full h-64 overflow-scroll" onChange={onChange} value={value} />
         )}
       </div>

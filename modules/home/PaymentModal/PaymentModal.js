@@ -8,6 +8,7 @@ import { createOrder } from "../../../services/orderService";
 import { toast } from "react-toastify";
 import Input from "../../../components/input/Input";
 import { useReceipt } from "../../../context/ReceiptContext";
+import LoyaltyCard from "../LoyaltyCard/LoyaltyCard";
 
 const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
   const { receipt, clearReceipt } = useReceipt();
@@ -42,21 +43,7 @@ const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
             Payment Screen
           </Dialog.Title>
           <div className="grid grid-cols-2 divide-x divide-gray-200 gap-3">
-            <div className="mt-10">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">Loyalty Card?</h2>
-                <p className="w-full break-words">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc metus augue, vehicula in leo vel, ornare venenatis lacus. Praesent diam ipsum, imperdiet a lobortis
-                  eget, porttitor non justo.
-                </p>
-              </div>
-              <Input icon={<BsCreditCard className="text-gray-400" size={24} />} placeholder="###-####-####" type="number" />
-              <button className=" bg-black ring-2 hover:ring-4 ring-offset-2 ring-black border  border-transparent  py-3 px-5 mt-4 ml-auto text-white font-semibold rounded-lg hover:shadow-lg   transition duration-3000 cursor-pointer">
-                <div className="flex space-x-4">
-                  <span>Check</span>
-                </div>
-              </button>
-            </div>
+            <LoyaltyCard />
             <div className=" p-5">
               <div>
                 <h2 className="text-6xl">

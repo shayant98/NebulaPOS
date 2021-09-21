@@ -28,6 +28,16 @@ export const getProductById = async ({ queryKey }) => {
   }
 };
 
+export const getBestSellingProducts = async () => {
+  try {
+    const res = await axios.get(`/api/products/best`);
+
+    return res.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const updateProductById = async (product) => {
   console.log(product);
   const config = {

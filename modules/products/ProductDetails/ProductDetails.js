@@ -58,7 +58,6 @@ const ProductDetails = ({ product }) => {
     });
   };
 
-  console.log(data);
   return (
     <div>
       {isLoading ? (
