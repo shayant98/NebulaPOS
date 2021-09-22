@@ -8,7 +8,7 @@ import { createOrder } from "../../../services/orderService";
 import { toast } from "react-toastify";
 import Input from "../../../components/input/Input";
 import { useReceipt } from "../../../context/ReceiptContext";
-import LoyaltyCard from "../LoyaltyCard/LoyaltyCard";
+import LoyaltyCardForm from "../LoyaltyCardForm/LoyaltyCardForm";
 
 const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
   const { receipt, clearReceipt } = useReceipt();
@@ -43,7 +43,7 @@ const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
             Payment Screen
           </Dialog.Title>
           <div className="grid grid-cols-2 divide-x divide-gray-200 gap-3">
-            <LoyaltyCard />
+            <LoyaltyCardForm />
             <div className=" p-5">
               <div>
                 <h2 className="text-6xl">

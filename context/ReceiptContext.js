@@ -9,6 +9,8 @@ export function ReceiptProvider({ children }) {
   const [receiptItems, setReceiptItems] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [discountType, setDiscountType] = useState("");
   const tax = 30;
   const removeItem = (id) => {
     const newReceiptItems = recalulateItemTotal(
@@ -61,7 +63,7 @@ export function ReceiptProvider({ children }) {
 
   const calculateTotal = (subTotal) => {
     if (subTotal > 0) {
-      setTotal((subTotal + tax).toFixed(2));
+      setTotal((subTotal + tax - discount).toFixed(2));
     } else {
       setTotal(0);
     }
@@ -74,7 +76,7 @@ export function ReceiptProvider({ children }) {
   };
 
   return (
-    <ReceiptContext.Provider value={{ receiptItems, subTotal, total, tax }}>
+    <ReceiptContext.Provider value={{ receiptItems, subTotal, total, tax, discount, setDiscount, discountType, setDiscountType, calculateTotal }}>
       <ReceiptItemRemoveContext.Provider value={removeItem}>
         <ReceiptClearContext.Provider value={clearReceipt}>
           <ReceiptItemAddContext.Provider value={addItem}>{children}</ReceiptItemAddContext.Provider>

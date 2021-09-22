@@ -27,8 +27,6 @@ const getProductById = async ({ query: { id } }, res) => {
   res.status(200).json(product);
 };
 
-export default handler;
-
 const updateProduct = async (req, res) => {
   const body = req.body;
 
@@ -64,3 +62,4 @@ const deleteProduct = async ({ query: { id } }, res) => {
     console.log(error);
   }
 };
+export default handler;
