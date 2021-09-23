@@ -16,15 +16,14 @@ export const getCustomerByCard = async ({ queryKey }) => {
   }
 };
 
-export const addCreditToCard = async ({ credit, number }) => {
+export const addCreditToCard = async ({ total, number }) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  console.log(credit);
   try {
-    const { data } = await axios.put(`/api/customers/loyalty/${number}`, { credit }, config);
+    const { data } = await axios.put(`/api/customers/loyalty/${number}`, { total }, config);
     return data;
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message;

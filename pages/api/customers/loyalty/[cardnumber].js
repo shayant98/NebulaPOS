@@ -12,35 +12,56 @@ const handler = async (req, res) => {
 };
 
 const getCustomerByCardNumber = async ({ query: { cardnumber } }, res) => {
-  const customer = await prisma.customers.findFirst({
-    where: {
-      loyalty_number: cardnumber,
-    },
-  });
+  try {
+    const customer = await prisma.customers.findFirst({
+      where: {
+        loyalty_number: cardnumber,
+      },
+    });
 
-  res.status(200).json(customer);
+    res.status(200).json(customer);
+  } catch (error) {
+    res.status(500).json({ message: "Unable to find customer" });
+  }
 };
 
 const addCreditToCustomerCard = async (req, res) => {
   const currentCredit = await prisma.customers.findFirst({
     select: {
       loyalty_credit: true,
+      birthday: true,
     },
     where: {
       loyalty_number: req.query.cardnumber,
-    },
-  });
-  console.log(currentCredit);
-  const updateUser = await prisma.customers.update({
-    where: {
-      loyalty_number: req.query.cardnumber,
-    },
-    data: {
-      loyalty_credit: Number(req.body.credit + currentCredit.loyalty_credit).toFixed(2),
     },
   });
 
-  res.status(200).json(updateUser);
+  let creditMultiplier = 0.1;
+  if (isBirthday(new Date(currentCredit.birthday))) {
+    creditMultiplier = 0.25;
+  }
+  const credit = Number(req.body.total * creditMultiplier).toFixed(2);
+  const newTotal = Number(credit) + currentCredit.loyalty_credit;
+  try {
+    const updatedCustomer = await prisma.customers.update({
+      where: {
+        loyalty_number: req.query.cardnumber,
+      },
+      data: {
+        loyalty_credit: Number(newTotal),
+      },
+    });
+
+    res.status(200).json(updatedCustomer);
+  } catch (error) {
+    res.status(500).json({ message: "Unable to add credit" });
+  }
+};
+
+const isBirthday = (date) => {
+  const today = new Date();
+
+  return date.getDate() === today.getDate() && date.getMonth() === today.getMonth();
 };
 
 export default handler;

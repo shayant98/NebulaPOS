@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Input from "../../../components/input/Input";
 import { useReceipt } from "../../../context/ReceiptContext";
 import { addCreditToCard, getCustomerByCard } from "../../../services/customerService";
+import LoyaltyCard from "../LoyaltyCard/LoyaltyCard";
 
 function LoyaltyCardForm() {
   const {
@@ -13,8 +14,8 @@ function LoyaltyCardForm() {
   } = useReceipt();
   const [cardNumber, setCardNumber] = useState("");
 
-  const { data, isLoading, refetch, remove } = useQuery(["cardNumber", cardNumber], getCustomerByCard, { enabled: false });
-
+  const { data, isLoading, refetch, isFetched, isFetching } = useQuery(["cardNumber", cardNumber], getCustomerByCard, { enabled: false });
+  console.log(isFetched);
   const addCreditMut = useMutation(addCreditToCard);
 
   const handleSubmit = () => {
@@ -27,7 +28,7 @@ function LoyaltyCardForm() {
 
   const handleTopUp = () => {
     addCreditMut.mutate(
-      { credit: total * 0.1, number: cardNumber },
+      { total: total, number: cardNumber },
       {
         onSuccess: (data) => {
           refetch();
@@ -60,46 +61,20 @@ function LoyaltyCardForm() {
         placeholder="###-####-####"
         type="number"
       />
-      <button
-        onClick={handleSubmit}
-        className=" bg-black ring-2 hover:ring-4 ring-offset-2 ring-black border  border-transparent  py-3 px-5 mt-4 ml-auto text-white font-semibold rounded-lg hover:shadow-lg   transition duration-3000 cursor-pointer"
-      >
+      <button onClick={handleSubmit} className="text-white mt-4 p-3 bg-green-600  rounded">
         <div className="flex space-x-4">
-          <span>Check</span>
+          <span>Search</span>
         </div>
       </button>
-
-      {isLoading == false && data ? (
-        <div className="bg-gray-700 p-5 mt-10 rounded-xl shadow flex gap-4">
-          <div>
-            <div className="bg-green-400 p-10"></div>
-          </div>
-          <div>
-            <h2 className="text-4xl font-extrabold">
-              {data.name} {data.surname}
-            </h2>
-            <h2 className="text-xl  flex mt-4 gap">
-              <AiOutlineCalendar size={24} /> {data.birthday}
-            </h2>
-            <h2 className=" font-extrabold flex mt-4 gap">Credit: ${data.loyalty_credit}</h2>
-            <div className="mt-4">
-              <button
-                onClick={handleTopUp}
-                className=" bg-black ring-2 hover:ring-4 ring-offset-2 ring-black border  border-transparent  py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg   transition duration-3000 cursor-pointer"
-              >
-                Top-Up
-              </button>
-              <button
-                onClick={handleCashout}
-                className=" bg-black ring-2 hover:ring-4 ring-offset-2 ring-black border  border-transparent  py-3 px-5 ml-3 text-white font-semibold rounded-lg hover:shadow-lg   transition duration-3000 cursor-pointer"
-              >
-                Cash Out
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
+      {/* {isLoading == false ? isFetched ? <LoyaltyCard handleCashout={handleCashout} handleTopUp={handleTopUp} /> : "Nothinf found" : "Loading"} */}
+      {isFetched && data ? (
+        <LoyaltyCard customer={data} handleCashout={handleCashout} handleTopUp={handleTopUp} />
+      ) : isFetched && isLoading ? (
         "Loading"
+      ) : isFetched && !data ? (
+        "Nothing"
+      ) : (
+        ""
       )}
     </div>
   );
