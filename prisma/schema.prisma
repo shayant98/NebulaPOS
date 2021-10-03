@@ -89,6 +89,20 @@ model Customers {
   loyalty_credit Float
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  CreditLog CreditLog[]
+}
+
+model CreditLog {
+  id             Int      @id @default(autoincrement())
+  customer_id Int
+  Customer Customers @relation(fields: [customer_id], references: [id])
+  createdAt      DateTime @default(now())
+  type CreditLogType @default(ADD)
+}
+
+enum CreditLogType {
+  ADD
+  SUBTRACT
 }
 
 model Users {

@@ -52,7 +52,13 @@ const addCreditToCustomerCard = async (req, res) => {
       },
     });
 
-    res.status(200).json(updatedCustomer);
+    const addLog = await prisma.creditLog.create({
+      data: {
+        customer_id: updatedCustomer.id,
+      },
+    });
+
+    return res.status(200).json(updatedCustomer);
   } catch (error) {
     res.status(500).json({ message: "Unable to add credit" });
   }
