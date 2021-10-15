@@ -40,15 +40,17 @@ model Brands {
 }
 
 model Orders {
-  id             Int             @id @default(autoincrement())
-  order_nr       String          @unique @default(cuid())
-  date           DateTime        @default(now())
-  payment_type   String
-  item_total     Float
-  order_total    Float
-  order_tax      Float
-  order_products OrderProducts[]
-  refunds        Refunds[]
+  id                  Int                @id @default(autoincrement())
+  order_nr            String             @unique @default(cuid())
+  date                DateTime           @default(now())
+  payment_type        String
+  item_total          Float
+  order_total         Float
+  order_tax           Float
+  order_discount      Float?
+  order_discount_type OrderDiscountType?
+  order_products      OrderProducts[]
+  refunds             Refunds[]
 }
 
 model OrderProducts {
@@ -81,28 +83,33 @@ model Refunds {
 }
 
 model Customers {
-  id             Int      @id @default(autoincrement())
+  id             Int         @id @default(autoincrement())
   name           String
   surname        String
   birthday       DateTime
-  loyalty_number String   @unique
+  loyalty_number String      @unique
   loyalty_credit Float
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  CreditLog CreditLog[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  CreditLog      CreditLog[]
 }
 
 model CreditLog {
-  id             Int      @id @default(autoincrement())
-  customer_id Int
-  Customer Customers @relation(fields: [customer_id], references: [id])
-  createdAt      DateTime @default(now())
-  type CreditLogType @default(ADD)
+  id          Int           @id @default(autoincrement())
+  customer_id Int?
+  Customer    Customers?    @relation(fields: [customer_id], references: [id])
+  createdAt   DateTime      @default(now())
+  type        CreditLogType @default(ADD)
 }
 
 enum CreditLogType {
   ADD
   SUBTRACT
+}
+
+enum OrderDiscountType {
+  MANUAL
+  CREDIT
 }
 
 model Users {

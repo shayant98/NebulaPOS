@@ -10,7 +10,7 @@ import LoyaltyCard from "../LoyaltyCard/LoyaltyCard";
 
 function LoyaltyCardForm() {
   const {
-    receipt: { setDiscount, setDiscountType, calculateTotal, subTotal, total },
+    receipt: { discount, setDiscount, setDiscountType, calculateTotal, subTotal, total },
   } = useReceipt();
   const [cardNumber, setCardNumber] = useState("");
 
@@ -36,9 +36,18 @@ function LoyaltyCardForm() {
     );
   };
 
-  const handleCashout = () => {
-    setDiscount(30);
-    setDiscountType("loyalty");
+  const handleCashout = (credit) => {
+    if (credit > 150) {
+      setDiscount(150);
+    } else {
+      setDiscount(credit);
+    }
+
+    if (discount >= subTotal) {
+      setDiscount(subTotal);
+    }
+
+    setDiscountType("CREDIT");
     calculateTotal(subTotal);
   };
 
@@ -67,7 +76,7 @@ function LoyaltyCardForm() {
       </button>
       {/* {isLoading == false ? isFetched ? <LoyaltyCard handleCashout={handleCashout} handleTopUp={handleTopUp} /> : "Nothinf found" : "Loading"} */}
       {isFetched && data ? (
-        <LoyaltyCard customer={data} handleCashout={handleCashout} handleTopUp={handleTopUp} />
+        <LoyaltyCard customer={data} handleCashout={handleCashout} handleTopUp={handleTopUp} discount={discount} />
       ) : isFetched && isLoading ? (
         "Loading"
       ) : isFetched && !data ? (

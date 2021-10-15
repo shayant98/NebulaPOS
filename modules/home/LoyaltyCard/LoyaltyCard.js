@@ -36,7 +36,7 @@ const LoyaltyCard = ({ customer, handleTopUp, handleCashout }) => {
             </button>
           )}
           {showCashout && (
-            <button onClick={handleCashout} className="text-green-400 hover:text-green-900 rounded transition duration-200">
+            <button onClick={() => handleCashout(customer.loyalty_credit)} className="text-green-400 hover:text-green-900 rounded transition duration-200">
               Cash Out
             </button>
           )}

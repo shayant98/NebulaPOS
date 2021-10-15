@@ -10,7 +10,7 @@ import Input from "../../../components/input/Input";
 import { useReceipt } from "../../../context/ReceiptContext";
 import LoyaltyCardForm from "../LoyaltyCardForm/LoyaltyCardForm";
 
-const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
+const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen }) => {
   const { receipt, clearReceipt } = useReceipt();
 
   const createOrderMut = useMutation(createOrder);
@@ -30,7 +30,6 @@ const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
       }
     );
   };
-
   return (
     <Dialog open={isPaymentModalOpen} onClose={() => setIsPaymentModalOpen(false)}>
       <div className="">
@@ -49,6 +48,9 @@ const PaymentModal = ({ isPaymentModalOpen, setIsPaymentModalOpen, total }) => {
                 <h2 className="text-6xl">
                   Your total is: <span className="font-bold">${receipt.total}</span>
                 </h2>
+                {/* <h2 className="text-lg">
+                  discount ammount: <span className="font-bold">${discount}</span>
+                </h2> */}
               </div>
               <p className="mt-20 text-2xl">Payment options:</p>
               <ul>
