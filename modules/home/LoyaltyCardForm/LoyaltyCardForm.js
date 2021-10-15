@@ -15,7 +15,6 @@ function LoyaltyCardForm() {
   const [cardNumber, setCardNumber] = useState("");
 
   const { data, isLoading, refetch, isFetched, isFetching } = useQuery(["cardNumber", cardNumber], getCustomerByCard, { enabled: false });
-  console.log(isFetched);
   const addCreditMut = useMutation(addCreditToCard);
 
   const handleSubmit = () => {

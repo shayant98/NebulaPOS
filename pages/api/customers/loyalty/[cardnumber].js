@@ -17,6 +17,9 @@ const getCustomerByCardNumber = async ({ query: { cardnumber } }, res) => {
       where: {
         loyalty_number: cardnumber,
       },
+      include: {
+        CreditLog: true,
+      },
     });
 
     res.status(200).json(customer);

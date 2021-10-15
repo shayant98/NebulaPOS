@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import Card from "../../../components/Card/Card.js";
 
-function TodayRevenueCard({ todayRevenue, yesterdayRevenue }) {
+function TodayRevenueCard({ todayRevenue = 0, yesterdayRevenue = 0 }) {
   const [procent, setProcent] = useState(0);
   useEffect(() => {
     if (todayRevenue >= yesterdayRevenue) {
@@ -10,6 +10,7 @@ function TodayRevenueCard({ todayRevenue, yesterdayRevenue }) {
     } else {
       setProcent((yesterdayRevenue / todayRevenue) * 100);
     }
+    console.log(yesterdayRevenue);
   }, [todayRevenue, yesterdayRevenue, setProcent]);
   return (
     <div>

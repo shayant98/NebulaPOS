@@ -8,7 +8,6 @@ import OrdersListCard from "../modules/orders/OrdersListCard/OrdersListCard";
 import BestSellingCard from "../modules/orders/BestSellingCard/BestSellingCard";
 
 function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday }) {
-  console.log(totalOrdersYesterday);
   return (
     <PageContainer>
       <div className="grid grid-cols-6 grid-flow-row  gap-4 p-10">
