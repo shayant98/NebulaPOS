@@ -1,20 +1,9 @@
 import Card from "../../../components/Card/Card.js";
 
 function OrdersListCard({ orders }) {
-  console.log(orders);
   return (
     <Card size={2}>
-      <div className="flex">
-        <div className="bg-gray-700 p-2 w-min rounded-tl rounded-bl">
-          <p className="text-sm">Day</p>
-        </div>
-        <div className="bg-gray-700 p-2 w-min ">
-          <p className="text-sm">Week</p>
-        </div>
-        <div className="bg-gray-700 p-2 w-min rounded-tr rounded-br">
-          <p className="text-sm">Month</p>
-        </div>
-      </div>
+      <h3>Recent Orders</h3>
       <div className="mt-5">
         <table className="w-full text-left">
           <thead>

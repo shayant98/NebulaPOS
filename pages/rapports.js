@@ -6,15 +6,17 @@ import TodayOrdersCard from "../modules/orders/TodayOrdersCard/TodayOrdersCard";
 
 import OrdersListCard from "../modules/orders/OrdersListCard/OrdersListCard";
 import BestSellingCard from "../modules/orders/BestSellingCard/BestSellingCard";
+import TodayTotalDiscountCard from "../modules/orders/TodayTotalDiscountCard/TodayTotalDiscountCard";
 
-function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday }) {
+function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDiscountToday }) {
+  console.log(totalDiscountToday);
   return (
     <PageContainer>
       <div className="grid grid-cols-6 grid-flow-row  gap-4 p-10">
         <TodayRevenueCard todayRevenue={totalOrdersToday._sum.order_total} yesterdayRevenue={totalOrdersYesterday._sum.order_total} />
         <TodayOrdersCard todayOrders={totalOrdersToday._count.order_nr} yesterdayOrders={totalOrdersYesterday._count.order_nr} />
         <OrdersListCard orders={ordersToday} />
-        <BestSellingCard orders={ordersToday} />
+        <TodayTotalDiscountCard total={totalDiscountToday._sum.order_discount} />
       </div>
     </PageContainer>
   );
@@ -34,8 +36,8 @@ export async function getServerSideProps(ctx) {
     include: {
       order_products: true,
     },
+    take: 5,
   });
-
   const totalOrdersToday = await prisma.orders.aggregate({
     _count: {
       order_nr: true,
@@ -64,6 +66,21 @@ export async function getServerSideProps(ctx) {
       },
     },
   });
+  const totalDiscountToday = await prisma.orders.aggregate({
+    _sum: {
+      order_discount: true,
+    },
+    where: {
+      date: {
+        gte: new Date(nowDate.getFullYear() + "/" + (nowDate.getMonth() + 1) + "/" + nowDate.getDate()),
+        lte: new Date(nextDay),
+      },
+
+      order_discount: {
+        gt: 0,
+      },
+    },
+  });
 
   prisma.$disconnect;
 
@@ -73,6 +90,7 @@ export async function getServerSideProps(ctx) {
       ordersToday: json,
       totalOrdersToday,
       totalOrdersYesterday,
+      totalDiscountToday,
     },
   };
 }
