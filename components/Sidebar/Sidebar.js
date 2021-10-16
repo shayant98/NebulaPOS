@@ -8,9 +8,8 @@ const Sidebar = () => {
   const { theme, setTheme } = useTheme();
 
   const menuItems = [
-    { name: "Register", link: "/", icon: <AiOutlineShopping size={24} /> },
+    { name: "POS", link: "/", icon: <AiOutlineShopping size={24} /> },
     { name: "Products", link: "products", icon: <AiOutlineSkin size={24} /> },
-    { name: "Refund", link: "refund", icon: <AiOutlineUndo size={24} /> },
     { name: "Rapports", link: "rapports", icon: <AiOutlineFund size={24} /> },
   ];
 

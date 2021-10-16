@@ -4,10 +4,14 @@ import Card from "../../../components/Card/Card.js";
 function TodayOrdersCard({ todayOrders, yesterdayOrders }) {
   const [procent, setProcent] = useState(0);
   useEffect(() => {
-    if (todayOrders >= yesterdayOrders) {
-      setProcent((todayOrders / yesterdayOrders) * 100);
+    if (todayOrders === null || todayOrders == 0) {
+      setProcent(0);
     } else {
-      setProcent((yesterdayOrders / todayOrders) * 100);
+      if (todayOrders >= yesterdayOrders) {
+        setProcent(((todayOrders / yesterdayOrders) * 100).toFixed(2));
+      } else {
+        setProcent(((yesterdayOrders / todayOrders) * 100).toFixed(2));
+      }
     }
   }, [todayOrders, yesterdayOrders, setProcent]);
 

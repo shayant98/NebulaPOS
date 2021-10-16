@@ -5,12 +5,15 @@ import Card from "../../../components/Card/Card.js";
 function TodayRevenueCard({ todayRevenue = 0, yesterdayRevenue = 0 }) {
   const [procent, setProcent] = useState(0);
   useEffect(() => {
-    if (todayRevenue >= yesterdayRevenue) {
-      setProcent(((todayRevenue / yesterdayRevenue) * 100).toFixed(2));
+    if (yesterdayRevenue == null || todayRevenue == null) {
+      setProcent(0);
     } else {
-      setProcent(((yesterdayRevenue / todayRevenue) * 100).toFixed(2));
+      if (todayRevenue >= yesterdayRevenue) {
+        setProcent(((todayRevenue / yesterdayRevenue) * 100).toFixed(2));
+      } else {
+        setProcent(((yesterdayRevenue / todayRevenue) * 100).toFixed(2));
+      }
     }
-    console.log(yesterdayRevenue);
   }, [todayRevenue, yesterdayRevenue, setProcent]);
   return (
     <div>

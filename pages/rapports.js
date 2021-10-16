@@ -1,12 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import PageContainer from "../components/PageContainer/PageContainer";
 import superjson from "superjson";
-import TodayRevenueCard from "../modules/orders/TodayRevenueCard/TodayRevenueCard";
-import TodayOrdersCard from "../modules/orders/TodayOrdersCard/TodayOrdersCard";
+import TodayRevenueCard from "../modules/rapports/TodayRevenueCard/TodayRevenueCard";
+import TodayOrdersCard from "../modules/rapports/TodayOrdersCard/TodayOrdersCard";
 
-import OrdersListCard from "../modules/orders/OrdersListCard/OrdersListCard";
-import BestSellingCard from "../modules/orders/BestSellingCard/BestSellingCard";
-import TodayTotalDiscountCard from "../modules/orders/TodayTotalDiscountCard/TodayTotalDiscountCard";
+import OrdersListCard from "../modules/rapports/OrdersListCard/OrdersListCard";
+// import BestSellingCard from "../modules/rapports/BestSellingCard/BestSellingCard";
+import TodayTotalDiscountCard from "../modules/rapports/TodayTotalDiscountCard/TodayTotalDiscountCard";
+import { format, startOfDay, startOfToday, startOfTomorrow, startOfYesterday } from "date-fns";
 
 function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDiscountToday }) {
   console.log(totalDiscountToday);
@@ -23,14 +24,17 @@ function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDisc
 }
 export async function getServerSideProps(ctx) {
   const prisma = new PrismaClient();
-  const nowDate = new Date();
-  const nextDay = new Date().setDate(nowDate.getDate() + 1);
-  const prevDay = new Date().setDate(nowDate.getDate() - 2);
+  const today = new Date(format(startOfToday(), "yyyy/MM/dd"));
+  const tommorow = new Date(format(startOfTomorrow(), "yyyy/MM/dd"));
+  const yesterday = new Date(format(startOfYesterday(), "yyyy/MM/dd"));
+
+  console.log(format(startOfTomorrow(), "yyyy/MM/dd"));
+
   const ordersToday = await prisma.orders.findMany({
     where: {
       date: {
-        gte: new Date(nowDate.getFullYear() + "/" + (nowDate.getMonth() + 1) + "/" + nowDate.getDate()),
-        lte: new Date(nextDay),
+        gte: today,
+        lte: tommorow,
       },
     },
     include: {
@@ -47,8 +51,8 @@ export async function getServerSideProps(ctx) {
     },
     where: {
       date: {
-        gte: new Date(nowDate.getFullYear() + "/" + (nowDate.getMonth() + 1) + "/" + nowDate.getDate()),
-        lte: new Date(nextDay),
+        gte: today,
+        lte: tommorow,
       },
     },
   });
@@ -61,8 +65,8 @@ export async function getServerSideProps(ctx) {
     },
     where: {
       date: {
-        lte: new Date(nowDate.getFullYear() + "/" + (nowDate.getMonth() + 1) + "/" + nowDate.getDate()),
-        gte: new Date(prevDay),
+        gte: yesterday,
+        lte: today,
       },
     },
   });
@@ -72,8 +76,8 @@ export async function getServerSideProps(ctx) {
     },
     where: {
       date: {
-        gte: new Date(nowDate.getFullYear() + "/" + (nowDate.getMonth() + 1) + "/" + nowDate.getDate()),
-        lte: new Date(nextDay),
+        gte: today,
+        lte: tommorow,
       },
 
       order_discount: {
