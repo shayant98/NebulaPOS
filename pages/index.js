@@ -43,10 +43,8 @@ const home = ({ categories }) => {
 
       <div className="grid md:grid-cols-8 2xl:grid-cols-12">
         <div className="md:col-span-6 2xl:col-span-8">
-          <div className="p-10">
-            <Input placeholder="Zoek naar producten" />
-            <Categories categories={categories} setCurrentCategory={setCurrentCategory} setshowProductModal={setshowProductModal} />
-          </div>
+          <Input placeholder="Zoek naar producten" />
+          <Categories categories={categories} setCurrentCategory={setCurrentCategory} setshowProductModal={setshowProductModal} />
         </div>
         <Receipt />
       </div>

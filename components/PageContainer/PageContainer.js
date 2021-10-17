@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import Sidebar from "../Sidebar/Sidebar";
 
-const PageContainer = ({ children }) => {
+const PageContainer = ({ children, title = "" }) => {
   const [showSidebar, setshowSidebar] = useState(false);
 
   return (
@@ -23,7 +23,10 @@ const PageContainer = ({ children }) => {
           }}
         />
       </div>
-      {children}
+      <div className="px-10">
+        <h2 className="mb-10 text-6xl">{title}</h2>
+        {children}
+      </div>
     </div>
   );
 };

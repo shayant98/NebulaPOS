@@ -28,8 +28,6 @@ export async function getServerSideProps(ctx) {
   const tommorow = new Date(format(startOfTomorrow(), "yyyy/MM/dd"));
   const yesterday = new Date(format(startOfYesterday(), "yyyy/MM/dd"));
 
-  console.log(format(startOfTomorrow(), "yyyy/MM/dd"));
-
   const ordersToday = await prisma.orders.findMany({
     where: {
       date: {

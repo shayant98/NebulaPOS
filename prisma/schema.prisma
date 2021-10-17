@@ -86,6 +86,7 @@ model Customers {
   id             Int         @id @default(autoincrement())
   name           String
   surname        String
+  email          String?
   birthday       DateTime
   loyalty_number String      @unique
   loyalty_credit Float
@@ -100,6 +101,11 @@ model CreditLog {
   Customer    Customers?    @relation(fields: [customer_id], references: [id])
   createdAt   DateTime      @default(now())
   type        CreditLogType @default(ADD)
+}
+
+model Giftcard {
+  id    Int @id @default(autoincrement())
+  value Int
 }
 
 enum CreditLogType {

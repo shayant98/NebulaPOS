@@ -1,5 +1,5 @@
 import SidebarItems from "./SidebarItems";
-import { AiOutlineFund, AiOutlineLogout, AiOutlineShop, AiOutlineShopping, AiOutlineSkin, AiOutlineUndo } from "react-icons/ai";
+import { AiOutlineCreditCard, AiOutlineFund, AiOutlineLogout, AiOutlineShop, AiOutlineShopping, AiOutlineSkin, AiOutlineUndo } from "react-icons/ai";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useTheme } from "next-themes";
 import { signOut } from "next-auth/client";
@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: "POS", link: "/", icon: <AiOutlineShopping size={24} /> },
-    { name: "Products", link: "products", icon: <AiOutlineSkin size={24} /> },
+    { name: "Giftcards", link: "giftcard", icon: <AiOutlineCreditCard size={24} /> },
     { name: "Rapports", link: "rapports", icon: <AiOutlineFund size={24} /> },
   ];
 
