@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export const getAllProducts = async ({ queryKey }) => {
+  try {
+    const res = await axios.get(`/api/products`);
+    return res.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const getProducts = async ({ queryKey }) => {
   try {
     const id = queryKey[1];

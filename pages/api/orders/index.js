@@ -22,7 +22,7 @@ const createOrder = async (req, res) => {
         order_total: parseFloat(body.receipt.total),
         order_tax: body.receipt.tax,
         order_discount: body.receipt.discount,
-        order_discount_type: body.receipt.discountType == "" ? NULL : body.receipt.discountType,
+        order_discount_type: body.receipt.discountType == "" ? "NONE" : body.receipt.discountType,
         order_products: {
           createMany: {
             data: productArray,

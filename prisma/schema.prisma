@@ -116,6 +116,7 @@ enum CreditLogType {
 enum OrderDiscountType {
   MANUAL
   CREDIT
+  NONE
 }
 
 model Users {
