@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import LoginForm from "../modules/Login/LoginForm/LoginForm";
+import db from "../utils/db";
 
 const login = ({ csrfToken, stores }) => {
   const { query } = useRouter();
@@ -33,7 +34,7 @@ const login = ({ csrfToken, stores }) => {
 export async function getServerSideProps(context) {
   const { req, res } = context;
   const session = await getSession({ req });
-  const prisma = new PrismaClient();
+  const prisma = db;
 
   if (session && res) {
     res.writeHead(302, {

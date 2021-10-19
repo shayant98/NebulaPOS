@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import PageContainer from "../components/PageContainer/PageContainer";
 import superjson from "superjson";
 import TodayRevenueCard from "../modules/rapports/TodayRevenueCard/TodayRevenueCard";
@@ -7,7 +6,8 @@ import TodayOrdersCard from "../modules/rapports/TodayOrdersCard/TodayOrdersCard
 import OrdersListCard from "../modules/rapports/OrdersListCard/OrdersListCard";
 // import BestSellingCard from "../modules/rapports/BestSellingCard/BestSellingCard";
 import TodayTotalDiscountCard from "../modules/rapports/TodayTotalDiscountCard/TodayTotalDiscountCard";
-import { format, startOfDay, startOfToday, startOfTomorrow, startOfYesterday } from "date-fns";
+import { format, startOfToday, startOfTomorrow, startOfYesterday } from "date-fns";
+import db from "../utils/db";
 
 function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDiscountToday }) {
   console.log(totalDiscountToday);
@@ -23,7 +23,7 @@ function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDisc
   );
 }
 export async function getServerSideProps(ctx) {
-  const prisma = new PrismaClient();
+  const prisma = db;
   const today = new Date(format(startOfToday(), "yyyy/MM/dd"));
   const tommorow = new Date(format(startOfTomorrow(), "yyyy/MM/dd"));
   const yesterday = new Date(format(startOfYesterday(), "yyyy/MM/dd"));

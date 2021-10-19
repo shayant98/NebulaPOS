@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import db from "../../../utils/db";
 
-const prisma = new PrismaClient();
+const prisma = db;
 
 const handler = async (req, res) => {
   if (req.method === "GET") {

@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { useState, Fragment } from "react";
 import ProductModel from "../modules/home/ProductModal/ProductModal";
 import PageContainer from "../components/PageContainer/PageContainer";
@@ -11,6 +10,7 @@ import { getAllProducts } from "../services/productService";
 import { Dialog, Transition } from "@headlessui/react";
 import FilteredProductsTable from "../modules/home/FilteredProductsTable/FilteredProductsTable";
 import { useReceipt } from "../context/ReceiptContext";
+import db from "../utils/db";
 
 const home = ({ categories }) => {
   const { data: products } = useQuery("products", getAllProducts, { initialData: [] });
@@ -73,7 +73,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const prisma = new PrismaClient();
+  const prisma = db;
 
   const categories = await prisma.category.findMany({
     select: {
@@ -82,7 +82,6 @@ export async function getServerSideProps(context) {
       image: true,
     },
   });
-  prisma.$disconnect;
   return {
     props: { categories },
   };

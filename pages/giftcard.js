@@ -3,6 +3,7 @@ import { useState } from "react";
 import PageContainer from "../components/PageContainer/PageContainer";
 import CardList from "../modules/giftcard/CardList/CardList";
 import CardModal from "../modules/giftcard/CardModal/CardModal";
+import db from "../utils/db";
 
 const giftcard = ({ giftcards, customers }) => {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,7 @@ const giftcard = ({ giftcards, customers }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const prisma = new PrismaClient();
+  const prisma = db;
 
   const giftcards = await prisma.giftcard.findMany({});
   const customers = await prisma.customers.findMany({ select: { id: true, surname: true, name: true, email: true } });

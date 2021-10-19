@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import db from "../../../utils/db";
 
-const prisma = new PrismaClient();
+const prisma = db;
 
 const getCategoryById = async ({ query: { id } }, res) => {
   const category = await prisma.category.findFirst({

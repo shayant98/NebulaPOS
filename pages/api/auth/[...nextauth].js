@@ -1,10 +1,9 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import db from "../../../utils/db";
+const prisma = db;
 
-// const prisma = new PrismaClient();
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
