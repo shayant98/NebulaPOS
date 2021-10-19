@@ -28,8 +28,12 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
+    "faker": "^5.5.3",
     "postcss": "^8.3.5",
     "prisma": "^3.1.1",
     "tailwindcss": "^2.2.4"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }

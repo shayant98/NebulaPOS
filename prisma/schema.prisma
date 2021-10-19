@@ -50,36 +50,15 @@ model Orders {
   order_discount      Float?
   order_discount_type OrderDiscountType?
   order_products      OrderProducts[]
-  refunds             Refunds[]
 }
 
 model OrderProducts {
-  id         Int       @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   order_id   Int?
   product_id Int?
   qty        Int
-  product    Product?  @relation(fields: [product_id], references: [id])
-  order      Orders?   @relation(fields: [order_id], references: [id])
-  Refunds    Refunds[]
-}
-
-model RefundTypes {
-  id      Int       @id @default(autoincrement())
-  type    String
-  refunds Refunds[]
-}
-
-model Refunds {
-  id               Int           @id @default(autoincrement())
-  refund_request   DateTime      @default(now())
-  ammount_refunded Float
-  refund_type      Int
-  order_id         Int
-  order_product_id Int
-  order            Orders        @relation(fields: [order_id], references: [id])
-  order_products   OrderProducts @relation(fields: [order_product_id], references: [id])
-  refund_type_id   RefundTypes   @relation(fields: [refund_type], references: [id])
-
+  product    Product? @relation(fields: [product_id], references: [id])
+  order      Orders?  @relation(fields: [order_id], references: [id])
 }
 
 model Customers {
@@ -128,4 +107,16 @@ model Users {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   active    Boolean  @default(true)
+  Stores    Stores   @relation(fields: [storesId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  storesId  Int
+}
+
+model Stores {
+  id      Int     @id @default(autoincrement())
+  name    String
+  street  String
+  city    String
+  state   String
+  country String
+  Users   Users[]
 }

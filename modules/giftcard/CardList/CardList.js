@@ -2,7 +2,7 @@ import Giftcard from "../Giftcard/Giftcard";
 
 const CardList = ({ onClick, giftcards }) => {
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-10 ">
+    <div className="grid grid-cols-3 grid-rows-3 gap-4 ">
       {giftcards.map((card) => (
         <Giftcard card={card} onClick={onClick} />
       ))}

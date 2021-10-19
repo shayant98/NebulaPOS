@@ -49,7 +49,7 @@ export function ReceiptProvider({ children }) {
 
   const recalulateItemTotal = (newReceipt) => {
     return newReceipt.map((item) => {
-      item.totalPrice = item.qty * item.price;
+      item.totalPrice = (item.qty * item.price).toFixed(2);
       return item;
     });
   };

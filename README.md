@@ -24,6 +24,8 @@ A POS(Point of Sale) system with some extra features
 ## Tech Stack
 
 - **Next.JS**
+- **Next Auth**
+- **Prisma 2**
 - **MYSQL**
 - **TailwindCSS**
 - **Docker**
