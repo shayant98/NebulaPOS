@@ -8,6 +8,7 @@ import OrdersListCard from "../modules/rapports/OrdersListCard/OrdersListCard";
 import TodayTotalDiscountCard from "../modules/rapports/TodayTotalDiscountCard/TodayTotalDiscountCard";
 import { format, startOfToday, startOfTomorrow, startOfYesterday } from "date-fns";
 import db from "../utils/db";
+import checkAuth from "../utils/checkAuth";
 
 function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDiscountToday }) {
   console.log(totalDiscountToday);
@@ -23,6 +24,16 @@ function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDisc
   );
 }
 export async function getServerSideProps(ctx) {
+  const isLoggedIn = checkAuth(ctx);
+  if (isLoggedIn) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
   const prisma = db;
   const today = new Date(format(startOfToday(), "yyyy/MM/dd"));
   const tommorow = new Date(format(startOfTomorrow(), "yyyy/MM/dd"));

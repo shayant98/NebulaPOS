@@ -1,11 +1,15 @@
 import { PrismaClient } from ".prisma/client";
+import { getSession, useSession } from "next-auth/client";
 import { useState } from "react";
 import PageContainer from "../components/PageContainer/PageContainer";
 import CardList from "../modules/giftcard/CardList/CardList";
 import CardModal from "../modules/giftcard/CardModal/CardModal";
+import checkAuth from "../utils/checkAuth";
 import db from "../utils/db";
 
 const giftcard = ({ giftcards, customers }) => {
+  const { data: session, status } = useSession();
+
   const [showModal, setShowModal] = useState(false);
   const [selectedGiftcard, setSelectedGiftcard] = useState(0);
 
@@ -24,6 +28,15 @@ const giftcard = ({ giftcards, customers }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
+  const isLoggedIn = checkAuth(ctx);
+  if (isLoggedIn) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
   const prisma = db;
 
   const giftcards = await prisma.giftcard.findMany({});
