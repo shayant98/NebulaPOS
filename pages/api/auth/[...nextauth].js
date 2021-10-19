@@ -15,15 +15,16 @@ export default NextAuth({
           where: {
             username: credentials.username,
             password: credentials.password,
+            storesId: parseInt(credentials.store),
           },
         });
+
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {
-          return null;
           // You can also Reject this callback with an Error or with a URL:
-          // throw new Error('error message') // Redirect to error page
+          throw new Error("Credentials Invalid: Make sure correct store is selected"); // Redirect to error page
           // throw '/path/to/redirect'        // Redirect to a URL
         }
       },
