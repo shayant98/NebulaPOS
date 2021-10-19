@@ -9,6 +9,7 @@ import TodayTotalDiscountCard from "../modules/rapports/TodayTotalDiscountCard/T
 import { format, startOfToday, startOfTomorrow, startOfYesterday } from "date-fns";
 import db from "../utils/db";
 import checkAuth from "../utils/checkAuth";
+import { getSession } from "next-auth/client";
 
 function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDiscountToday }) {
   console.log(totalDiscountToday);
@@ -24,8 +25,8 @@ function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDisc
   );
 }
 export async function getServerSideProps(ctx) {
-  const isLoggedIn = checkAuth(ctx);
-  if (isLoggedIn) {
+  const session = await getSession(context);
+  if (!session) {
     return {
       redirect: {
         destination: "/login",

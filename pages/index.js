@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { useState, Fragment } from "react";
 import ProductModel from "../modules/home/ProductModal/ProductModal";
 import PageContainer from "../components/PageContainer/PageContainer";
@@ -11,7 +12,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import FilteredProductsTable from "../modules/home/FilteredProductsTable/FilteredProductsTable";
 import { useReceipt } from "../context/ReceiptContext";
 import db from "../utils/db";
-import checkAuth from "../utils/checkAuth";
 
 const home = ({ categories }) => {
   const { data: products } = useQuery("products", getAllProducts, { initialData: [] });
@@ -63,9 +63,9 @@ const home = ({ categories }) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
-  const isLoggedIn = checkAuth(ctx);
-  if (isLoggedIn) {
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
     return {
       redirect: {
         destination: "/login",

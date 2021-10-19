@@ -28,8 +28,8 @@ const giftcard = ({ giftcards, customers }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const isLoggedIn = checkAuth(ctx);
-  if (isLoggedIn) {
+  const session = await getSession(context);
+  if (!session) {
     return {
       redirect: {
         destination: "/login",
