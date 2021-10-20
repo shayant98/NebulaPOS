@@ -14,7 +14,6 @@ import useFlags from "../hooks/useFlags";
 
 const home = ({ categories }) => {
   const { addItem } = useReceipt();
-  const loginFlag = useFlags("login");
   const [currentCategory, setCurrentCategory] = useState(null);
   const [showProductModal, setshowProductModal] = useState(false);
   const [showSearchbox, setShowSearchbox] = useState(false);

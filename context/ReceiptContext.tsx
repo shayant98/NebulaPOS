@@ -6,7 +6,7 @@ const ReceiptClearContext = createContext(null);
 const ReceiptItemAddContext = createContext(null);
 
 export function ReceiptProvider({ children }) {
-  const [receiptItems, setReceiptItems] = useState<ReceiptItem[]>([]);
+  const [receiptItems, setReceiptItems] = useState<IReceiptItem[]>([]);
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalWithoutDiscount, setTotalWithoutDiscount] = useState(0);
@@ -31,7 +31,7 @@ export function ReceiptProvider({ children }) {
     setReceiptItems([...newReceiptItems]);
   };
 
-  const addItem = (item: ReceiptItem) => {
+  const addItem = (item: IReceiptItem) => {
     let newReceiptItems = [];
     if (receiptItems.filter((receiptItem) => item.id === receiptItem.id).length > 0) {
       newReceiptItems = recalulateItemTotal(

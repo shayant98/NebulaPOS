@@ -1,6 +1,23 @@
 import React from "react";
 import InputMask from "react-input-mask";
-const Input = ({ placeholder, type = "text", title, icon, onChange, onKeyPress, value, name, varient = "", mask = "" }) => {
+
+
+interface CInput {
+  placeholder: string
+  type?: string
+  title?: string
+  icon?: JSX.Element
+  onChange(e): void
+  onKeyPress(e): void
+  value: string | number
+  name?: string
+  varient?: string
+  mask?: string
+}
+
+
+
+const Input = ({ placeholder, type = "text", title, icon, onChange, onKeyPress, value, name, varient = "", mask = "" }:CInput)  => {
   return (
     <div className="">
       <label className="">{title}</label>
