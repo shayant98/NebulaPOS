@@ -10,12 +10,15 @@ services:
       - persistance:/app/data
     environment:
       MYSQL_ROOT_PASSWORD: root
-  search:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+  redis:
+    image: redis:alpine
     ports:
-      - 9200:9200
-      - 9300:9300
-    environment:
-      - discovery.type=single-node
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+      - redis-conf:/usr/local/etc/redis/redis.conf
+
 volumes:
   persistance:
+  redis-data:
+  redis-conf:

@@ -8,7 +8,6 @@ import OrdersListCard from "../modules/rapports/OrdersListCard/OrdersListCard";
 import TodayTotalDiscountCard from "../modules/rapports/TodayTotalDiscountCard/TodayTotalDiscountCard";
 import { format, startOfToday, startOfTomorrow, startOfYesterday } from "date-fns";
 import db from "../utils/db";
-import checkAuth from "../utils/checkAuth";
 import { getSession } from "next-auth/client";
 
 function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDiscountToday }) {
