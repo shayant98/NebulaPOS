@@ -2,7 +2,9 @@ import axios from "axios";
 
 export const getAllProducts = async ({ queryKey }) => {
   try {
-    const res = await axios.get(`/api/products`);
+    const searchQuery = queryKey[1];
+
+    const res = await axios.get(`/api/products?search=${searchQuery}`);
     return res.data;
   } catch (error) {
     throw new Error(error);

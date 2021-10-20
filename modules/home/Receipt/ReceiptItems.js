@@ -8,9 +8,11 @@ const ReceiptItems = () => {
   } = useReceipt();
 
   return (
-    <div className="flex-grow  p-4 overflow-y-auto">
+    <div className="flex-grow  p-4">
       <h3 className="text-3xl ">Receipt</h3>
-      {receiptItems.length > 0 ? receiptItems.map((item, index) => <ReceiptItem key={index} item={item} />) : <p className="mt-5">No products selected</p>}
+      <div className=" h-96 overflow-auto">
+        {receiptItems.length > 0 ? receiptItems.map((item, index) => <ReceiptItem key={index} item={item} />) : <p className="mt-5">No products selected</p>}
+      </div>
     </div>
   );
 };

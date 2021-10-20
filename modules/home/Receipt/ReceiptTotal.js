@@ -27,7 +27,7 @@ const ReceiptTotal = () => {
     calculateTotal(totalWithoutDiscount);
   };
   return (
-    <div className={`bg-gray-100 dark:bg-gray-900 flex-none m-5 p-5  rounded-xl shadow`}>
+    <div className={`absolute bottom-0 bg-gray-100 dark:bg-gray-900 flex-none m-5 p-5  rounded-xl shadow`}>
       <div className="flex flex-col">
         <div className="  p-5 w-full ">
           <div className="grid grid-cols-2">

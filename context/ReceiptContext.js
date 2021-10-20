@@ -55,8 +55,8 @@ export function ReceiptProvider({ children }) {
   };
 
   const calculateSubtotal = (receiptItems) => {
-    const total = receiptItems.reduce((prev, cur, index) => {
-      return prev + cur.totalPrice;
+    const total = receiptItems.reduce((prev, cur) => {
+      return parseFloat(prev) + parseFloat(cur.totalPrice);
     }, 0);
     setSubTotal(total);
     return total;

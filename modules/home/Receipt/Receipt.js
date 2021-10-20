@@ -5,7 +5,7 @@ import ReceiptTotal from "./ReceiptTotal";
 const Receipt = () => {
   return (
     <div className="col-span-4">
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col">
         <ReceiptItems />
         <ReceiptTotal />
       </div>

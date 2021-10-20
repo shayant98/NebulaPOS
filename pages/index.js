@@ -14,23 +14,22 @@ import { useReceipt } from "../context/ReceiptContext";
 import db from "../utils/db";
 
 const home = ({ categories }) => {
-  const { data: products } = useQuery("products", getAllProducts, { initialData: [] });
-
   const { addItem } = useReceipt();
-
   const [currentCategory, setCurrentCategory] = useState(null);
   const [showProductModal, setshowProductModal] = useState(false);
   const [showSearchbox, setShowSearchbox] = useState(false);
   const [filterInput, setFilterInput] = useState("");
+  const { data: products, refetch } = useQuery(["products", filterInput], getAllProducts, { initialData: [] });
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const handleFilter = (value) => {
+  const handleFilter = async (value) => {
+    const { data } = await refetch();
+    setFilteredProducts(data);
     if (value.length === 0) {
-      setFilteredProducts(products);
+      setFilteredProducts([]);
+      setShowSearchbox(false);
     } else {
       setShowSearchbox(true);
-      const filterProduct = products.filter((product) => product.name.toLowerCase().includes(filterInput));
-      setFilteredProducts(filterProduct);
     }
   };
 
@@ -45,7 +44,14 @@ const home = ({ categories }) => {
 
       <div className="grid md:grid-cols-8 2xl:grid-cols-12">
         <div className="md:col-span-6 2xl:col-span-8">
-          <Input placeholder="Zoek naar producten" value={filterInput} onChange={(e) => setFilterInput(e.target.value)} onKeyPress={(e) => handleFilter(e.target.value)} />
+          <Input
+            placeholder="Zoek naar producten"
+            value={filterInput}
+            onChange={(e) => setFilterInput(e.target.value)}
+            onKeyPress={async (e) => {
+              await handleFilter(e.target.value);
+            }}
+          />
           <Categories categories={categories} setCurrentCategory={setCurrentCategory} setshowProductModal={setshowProductModal} />
         </div>
         <Receipt />
