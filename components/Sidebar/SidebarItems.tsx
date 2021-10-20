@@ -1,8 +1,6 @@
-import { Switch } from "@headlessui/react";
-import { useTheme } from "next-themes";
 import SidebarItem from "./SidebarItem";
 
-const SidebarItems = ({ menuItems }) => {
+const SidebarItems = ({ menuItems }:SidebarItemsProps) => {
   return (
     <ul className="text-sm pt-10">
       {menuItems.map((menuItem, index) => (
@@ -11,5 +9,9 @@ const SidebarItems = ({ menuItems }) => {
     </ul>
   );
 };
+
+interface SidebarItemsProps {
+  menuItems: IMenuItem[]
+}
 
 export default SidebarItems;

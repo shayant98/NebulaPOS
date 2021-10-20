@@ -7,10 +7,10 @@ import { signOut } from "next-auth/client";
 const Sidebar = () => {
   const { theme, setTheme } = useTheme();
 
-  const menuItems = [
-    { name: "POS", link: "/", icon: <AiOutlineShopping size={24} /> },
-    { name: "Giftcards", link: "giftcard", icon: <AiOutlineCreditCard size={24} /> },
-    { name: "Rapports", link: "rapports", icon: <AiOutlineFund size={24} /> },
+  const menuItems: IMenuItem[] = [
+    { name: "POS", link: "/", icon: <AiOutlineShopping size={24} />, flag: "pos" },
+    { name: "Giftcards", link: "giftcard", icon: <AiOutlineCreditCard size={24} />, flag: "giftcards" },
+    { name: "Rapports", link: "rapports", icon: <AiOutlineFund size={24} />, flag: "rapports" },
   ];
 
   return (
@@ -30,6 +30,7 @@ const Sidebar = () => {
         </div>
         <div className="col-span-10 p-2">
           <SidebarItems menuItems={menuItems} />
+          <button className="h-0 w-0 overflow-hidden" />
         </div>
       </div>
     </div>

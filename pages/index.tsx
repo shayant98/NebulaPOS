@@ -1,18 +1,19 @@
 import { useState } from "react";
-import ProductModel from "../modules/home/ProductModal/ProductModal";
-import PageContainer from "../components/PageContainer/PageContainer";
+import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/client";
-import Categories from "../modules/home/Categories/Categories";
-import Receipt from "../modules/home/Receipt/Receipt";
-import Input from "../components/input/Input";
 import { useQuery } from "react-query";
-import { getAllProducts } from "../services/productService";
-import FilteredProductsTable from "../modules/home/FilteredProductsTable/FilteredProductsTable";
-import { useReceipt } from "../context/ReceiptContext";
-import db from "../utils/db";
-import useFlags from "../hooks/useFlags";
+import db from "@utils/db";
 
-const home = ({ categories }) => {
+import ProductModel from "@modules/home/ProductModal/ProductModal";
+import PageContainer from "@components/PageContainer/PageContainer";
+import Categories from "@modules/home/Categories/Categories";
+import Receipt from "@modules/home/Receipt/Receipt";
+import FilteredProductsTable from "@modules/home/FilteredProductsTable/FilteredProductsTable";
+import Input from "@components/input/Input";
+import { getAllProducts } from "@services/productService";
+import { useReceipt } from "../context/ReceiptContext";
+
+const home = ({ categories }: HomeProps) => {
   const { addItem } = useReceipt();
   const [currentCategory, setCurrentCategory] = useState(null);
   const [showProductModal, setshowProductModal] = useState(false);
@@ -21,7 +22,7 @@ const home = ({ categories }) => {
   const { data: products, refetch } = useQuery(["products", filterInput], getAllProducts, { initialData: [] });
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const handleFilter = async (value) => {
+  const handleFilter = async (value: string) => {
     const { data } = await refetch();
     setFilteredProducts(data);
     if (value.length === 0) {
@@ -32,7 +33,7 @@ const home = ({ categories }) => {
     }
   };
 
-  const handleProductSelect = (product) => {
+  const handleProductSelect = (product: IProduct) => {
     const receiptItem = { id: product.id, name: product.name, price: product.price };
     addItem(receiptItem);
   };
@@ -68,7 +69,7 @@ const home = ({ categories }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
   if (!session) {
     return {
@@ -91,6 +92,11 @@ export async function getServerSideProps(context) {
   return {
     props: { categories },
   };
+}
+
+
+interface HomeProps {
+  categories: Category[]
 }
 
 export default home;
