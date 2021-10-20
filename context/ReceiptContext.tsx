@@ -1,19 +1,22 @@
 import { createContext, useContext, useState } from "react";
 
-export const ReceiptContext = createContext();
-const ReceiptItemRemoveContext = createContext();
-const ReceiptClearContext = createContext();
-const ReceiptItemAddContext = createContext();
+export const ReceiptContext = createContext(null);
+const ReceiptItemRemoveContext = createContext(null);
+const ReceiptClearContext = createContext(null);
+const ReceiptItemAddContext = createContext(null);
 
 export function ReceiptProvider({ children }) {
-  const [receiptItems, setReceiptItems] = useState([]);
+  const [receiptItems, setReceiptItems] = useState<ReceiptItem[]>([]);
   const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalWithoutDiscount, setTotalWithoutDiscount] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [discountType, setDiscountType] = useState("");
   const [tax, setTax] = useState(total * 0.08);
-  const removeItem = (id) => {
+
+
+
+  const removeItem = (id: number) => {
     const newReceiptItems = recalulateItemTotal(
       receiptItems
         .map((receiptItem) => {
@@ -28,7 +31,7 @@ export function ReceiptProvider({ children }) {
     setReceiptItems([...newReceiptItems]);
   };
 
-  const addItem = (item) => {
+  const addItem = (item: ReceiptItem) => {
     let newReceiptItems = [];
     if (receiptItems.filter((receiptItem) => item.id === receiptItem.id).length > 0) {
       newReceiptItems = recalulateItemTotal(
@@ -64,7 +67,7 @@ export function ReceiptProvider({ children }) {
 
   const calculateTotal = (subTotal) => {
     if (subTotal > 0) {
-      setTotal((subTotal + tax - discount).toFixed(2));
+      setTotal(parseFloat((subTotal + tax - discount).toFixed(2)));
       setTotalWithoutDiscount(subTotal);
     } else {
       setTotal(0);

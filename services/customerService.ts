@@ -1,13 +1,11 @@
 import axios from "axios";
 
-export const getCustomerByCard = async ({ queryKey }) => {
+export const getCustomerByCard = async ({ queryKey }): Promise<ICustomer> => {
   try {
     const number = queryKey[1];
     if (number === null) {
-      return [];
+      return null;
     }
-
-    console.log(number);
     const res = await axios.get(`/api/customers/loyalty/${number}`);
 
     return res.data;
@@ -16,14 +14,14 @@ export const getCustomerByCard = async ({ queryKey }) => {
   }
 };
 
-export const addCreditToCard = async ({ total, number }) => {
+export const addCreditToCard = async ({ loyaltyNumber }: { loyaltyNumber: number}): Promise<ICustomer> => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   try {
-    const { data } = await axios.put(`/api/customers/loyalty/${number}`, { total }, config);
+    const { data } = await axios.put(`/api/customers/loyalty/${loyaltyNumber}`, {  }, config);
     return data;
   } catch (error) {
     const message = error.response && error.response.data.error ? error.response.data.error : error.message;

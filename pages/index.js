@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import ProductModel from "../modules/home/ProductModal/ProductModal";
 import PageContainer from "../components/PageContainer/PageContainer";
 import { getSession } from "next-auth/client";
@@ -8,13 +7,14 @@ import Receipt from "../modules/home/Receipt/Receipt";
 import Input from "../components/input/Input";
 import { useQuery } from "react-query";
 import { getAllProducts } from "../services/productService";
-import { Dialog, Transition } from "@headlessui/react";
 import FilteredProductsTable from "../modules/home/FilteredProductsTable/FilteredProductsTable";
 import { useReceipt } from "../context/ReceiptContext";
 import db from "../utils/db";
+import useFlags from "../hooks/useFlags";
 
 const home = ({ categories }) => {
   const { addItem } = useReceipt();
+  const loginFlag = useFlags("login");
   const [currentCategory, setCurrentCategory] = useState(null);
   const [showProductModal, setshowProductModal] = useState(false);
   const [showSearchbox, setShowSearchbox] = useState(false);
