@@ -24,7 +24,7 @@ const PageContainer = ({ children, title = "" }) => {
         />
       </div>
       <div className="px-10">
-        <h2 className="mb-10 text-6xl">{title}</h2>
+        <h2 className="my-10 text-6xl">{title}</h2>
         {children}
       </div>
     </div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import PageContainer from "../components/PageContainer/PageContainer";
 import CardList from "../modules/giftcard/CardList/CardList";
 import CardModal from "../modules/giftcard/CardModal/CardModal";
-import checkAuth from "../utils/checkAuth";
 import db from "../utils/db";
 
 const giftcard = ({ giftcards, customers }) => {
@@ -19,8 +18,7 @@ const giftcard = ({ giftcards, customers }) => {
   };
 
   return (
-    <PageContainer>
-      <h2 className="mb-10 text-6xl">Giftcards</h2>
+    <PageContainer title="Giftcards">
       <CardList giftcards={giftcards} onClick={handleClick} />
       <CardModal showModal={showModal} setShowModal={setShowModal} selectedGiftcard={selectedGiftcard} customers={customers} />
     </PageContainer>
@@ -28,7 +26,7 @@ const giftcard = ({ giftcards, customers }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const session = await getSession(context);
+  const session = await getSession(ctx);
   if (!session) {
     return {
       redirect: {

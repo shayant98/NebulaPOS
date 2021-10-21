@@ -1,3 +1,6 @@
-interface Category {
-
+interface ICategory {
+    name: string
+    description: string
 }
+
+export {}

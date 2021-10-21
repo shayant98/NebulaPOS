@@ -5,3 +5,5 @@ interface IReceiptItem {
     price: number
 
 }
+
+export {}
