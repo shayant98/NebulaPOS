@@ -1,5 +1,5 @@
 import SidebarItems from "./SidebarItems";
-import { AiOutlineCreditCard, AiOutlineFund, AiOutlineLogout, AiOutlineShop, AiOutlineShopping, AiOutlineSkin, AiOutlineUndo } from "react-icons/ai";
+import { AiOutlineCreditCard, AiOutlineFund, AiOutlineLogout, AiOutlineShop, AiOutlineShopping, AiOutlineSkin, AiOutlineUndo, AiOutlineUser } from "react-icons/ai";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useTheme } from "next-themes";
 import { signOut } from "next-auth/client";
@@ -11,6 +11,7 @@ const Sidebar = () => {
     { name: "POS", link: "/", icon: <AiOutlineShopping size={24} />, flag: "pos" },
     { name: "Giftcards", link: "giftcard", icon: <AiOutlineCreditCard size={24} />, flag: "giftcards" },
     { name: "Rapports", link: "rapports", icon: <AiOutlineFund size={24} />, flag: "rapports" },
+    { name: "Customers", link: "customer", icon: <AiOutlineUser size={24} />, flag: "customer-management" },
   ];
 
   return (

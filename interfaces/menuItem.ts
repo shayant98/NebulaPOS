@@ -4,5 +4,3 @@ interface IMenuItem {
     link: string
     flag: string
 }
-
-export {}

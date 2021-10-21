@@ -9,6 +9,7 @@ import { getSession } from "next-auth/client";
 import { useQuery } from "react-query";
 import { useState } from "react";
 import { getCustomers } from "@services/customerService";
+import CustomersTable from "@modules/customers/CustomersTable/CustomersTable";
 
 const customers = ({ customers , pages}: CCustomerProps) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
@@ -26,7 +27,7 @@ const customers = ({ customers , pages}: CCustomerProps) => {
 
 
 
-      const columns: {name: string, accessor: string, type?: string,varient?: string, action?: () => void}[] = [
+      const columns: TableColumn[] = [
     { name: "Name", accessor: "name" },
     { name: "Surname", accessor: "surname" },
     { name: "E-mail", accessor: "email" },
@@ -39,9 +40,7 @@ const customers = ({ customers , pages}: CCustomerProps) => {
 
     return (
         <PageContainer title="Customers">
-            <Card>
-                <Table columns={columns} data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} maxPages={pages} filter={filter} setFilter={setFilter}/>
-            </Card>
+            <CustomersTable columns={columns} data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} filter={filter} setFilter={setFilter}/>
         </PageContainer>
     );
 }

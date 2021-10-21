@@ -96,7 +96,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 
 interface HomeProps {
-  categories: Category[]
+  categories: ICategory[]
 }
 
 export default home;
