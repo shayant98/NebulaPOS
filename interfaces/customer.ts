@@ -1,9 +1,9 @@
 interface ICustomer {
-    id: number
+    id?: number
     name: string
     surname: string
     email: string
     birthday: Date;
-    loyalty_credit: number
-    loyalty_number: string
+    loyalty_credit?: number
+    loyalty_number?: string
 }

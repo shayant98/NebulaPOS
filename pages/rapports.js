@@ -24,7 +24,7 @@ function orders({ totalOrdersToday, totalOrdersYesterday, ordersToday, totalDisc
   );
 }
 export async function getServerSideProps(ctx) {
-  const session = await getSession(context);
+  const session = await getSession(ctx);
   if (!session) {
     return {
       redirect: {

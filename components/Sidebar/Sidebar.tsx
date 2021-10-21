@@ -9,9 +9,9 @@ const Sidebar = () => {
 
   const menuItems: IMenuItem[] = [
     { name: "POS", link: "/", icon: <AiOutlineShopping size={24} />, flag: "pos" },
-    { name: "Giftcards", link: "giftcard", icon: <AiOutlineCreditCard size={24} />, flag: "giftcards" },
-    { name: "Rapports", link: "rapports", icon: <AiOutlineFund size={24} />, flag: "rapports" },
-    { name: "Customers", link: "customer", icon: <AiOutlineUser size={24} />, flag: "customer-management" },
+    { name: "Giftcards", link: "/giftcard", icon: <AiOutlineCreditCard size={24} />, flag: "giftcards" },
+    { name: "Rapports", link: "/rapports", icon: <AiOutlineFund size={24} />, flag: "rapports" },
+    { name: "Customers", link: "/customer", icon: <AiOutlineUser size={24} />, flag: "customer-management" },
   ];
 
   return (

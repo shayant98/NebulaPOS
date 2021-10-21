@@ -44,3 +44,19 @@ export const addCreditToCard = async ({ loyaltyNumber }: { loyaltyNumber: number
     throw new Error(message);
   }
 };
+
+
+export const createCustomer = async (customer: ICustomer): Promise<ICustomer> => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+   try {
+    const { data } = await axios.post(`/api/customers/`, { customer }, config);
+    return data;
+  } catch (error) {
+    const message = error.response && error.response.data.error ? error.response.data.error : error.message;
+    throw new Error(message);
+  }
+}

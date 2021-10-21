@@ -10,6 +10,9 @@ import { useQuery } from "react-query";
 import { useState } from "react";
 import { getCustomers } from "@services/customerService";
 import CustomersTable from "@modules/customers/CustomersTable/CustomersTable";
+import { AiOutlinePlus } from "react-icons/ai";
+import Button from "@components/Button/Button";
+import Link from "next/link";
 
 const customers = ({ customers , pages}: CCustomerProps) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
@@ -39,7 +42,8 @@ const customers = ({ customers , pages}: CCustomerProps) => {
       ];
 
     return (
-        <PageContainer title="Customers">
+      <PageContainer title="Customers">
+        <a href='/customer/new'><Button type="button"><AiOutlinePlus size={24}/><span>Add new customer</span></Button></a>
             <CustomersTable columns={columns} data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} filter={filter} setFilter={setFilter}/>
         </PageContainer>
     );

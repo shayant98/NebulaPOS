@@ -15,29 +15,31 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-        "@hooks/*": ["hooks/*"],
-        "@components/*": [
-          "components/*"
-        ],
-        "@modules/*": [
-          "modules/*"
-        ],
-        "@utils/*": [
-          "utils/*"
-        ],
-        "@services/*": [
-          "services/*"
-        ],
-        "@context/*": [
-          "context/*"
-        ],
-        "@interfaces/*": [
-          "interfaces/*"
-        ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@modules/*": [
+        "modules/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@context/*": [
+        "context/*"
+      ],
+      "@interfaces/*": [
+        "interfaces/*"
+      ]
     }
   },
   "include": [
