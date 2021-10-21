@@ -6,25 +6,37 @@ import superjson from "superjson";
 import db from "@utils/db";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/client";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useState } from "react";
-import { getCustomers } from "@services/customerService";
+import { deleteCustomer, getCustomers } from "@services/customerService";
 import CustomersTable from "@modules/customers/CustomersTable/CustomersTable";
 import { AiOutlinePlus } from "react-icons/ai";
 import Button from "@components/Button/Button";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const customers = ({ customers , pages}: CCustomerProps) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [filter, setFilter] = useState<string>("")
-    const {data} = useQuery(["customer",currentPage, filter], getCustomers, {initialData: customers})
-    const handleEditClick = () => {
+  const { data, refetch } = useQuery(["customer", currentPage, filter], getCustomers, { initialData: customers })
+  const delMutation = useMutation(deleteCustomer)
+    const handleEditClick = (customer: ICustomer) => {
 
     }
 
 
-    const handleDeleteClick = () => {
+  const handleDeleteClick = (customer: ICustomer) => {
+      console.log(123);
 
+      delMutation.mutate(customer.id, {
+        onSuccess: () => {
+          refetch()
+          toast.success("Successfully Deleted customer")
+        },
+        onError: (error) => {
+          toast.error("Something went wrong during deletion")
+        }
+      })
     }
 
 

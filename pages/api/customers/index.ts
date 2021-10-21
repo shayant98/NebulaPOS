@@ -12,18 +12,12 @@ export default (req:NextApiRequest, res:NextApiResponse) => {
     case "POST":
       createCustomer(req, res);
        break;
-     case "PUT":
-      updateCustomer(req, res);
-       break;
-     case "DELETE":
-      deleteCustomer(req, res);
-      break;
   }
 
 
 }
 
-async function getCustomers(req: NextApiRequest, res: NextApiResponse<any>) {
+async function getCustomers(req: NextApiRequest, res: NextApiResponse<any>): Promise<void> {
   const selectedPage = parseInt(req.query.page as string)
   const filter: string = req.query.filter as string
   const customersPerPage: number = parseInt(req.query.take as string) | 5
@@ -71,13 +65,24 @@ async function getCustomers(req: NextApiRequest, res: NextApiResponse<any>) {
 }
 
 
-function createCustomer(req: NextApiRequest, res: NextApiResponse<any>) {
-  throw new Error('Function not implemented.');
-}
-function updateCustomer(req: NextApiRequest, res: NextApiResponse<any>) {
-  throw new Error('Function not implemented.');
-}
+async function createCustomer(req: NextApiRequest, res: NextApiResponse<any>): Promise<void> {
+  const body: ICustomer = req.body;
 
-function deleteCustomer(req: NextApiRequest, res: NextApiResponse<any>) {
-  throw new Error('Function not implemented.');
+    try {
+    const customer = await prisma.customers.create({
+      data: {
+        name: body.name,
+        surname: body.surname,
+        email: body.email,
+        birthday: body.birthday,
+        loyalty_credit: 0,
+        loyalty_number: "111-111-111"
+      },
+    });
+
+    res.status(200).json(customer);
+  } catch (error) {
+    res.status(500).json({ error: "Customer could not be inserted" });
+    console.log(error);
+  }
 }

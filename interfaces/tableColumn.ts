@@ -1,1 +1,1 @@
-interface TableColumn {name: string, accessor: string, type?: string,varient?: string, action?: () => void}
+interface TableColumn {name: string, accessor: string, type?: string,varient?: string, action?: Function}

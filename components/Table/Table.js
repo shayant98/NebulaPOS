@@ -21,8 +21,8 @@ const Table = ({ columns, data, currentPage, setCurrentPage, maxPages, filter, s
       <table className="w-full text-left">
         <thead>
           <tr>
-            {columns.map((column) => (
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            {columns.map((column, index) => (
+              <th key={index} scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {column.type !== "button" && column.name}
               </th>
             ))}
@@ -30,7 +30,7 @@ const Table = ({ columns, data, currentPage, setCurrentPage, maxPages, filter, s
         </thead>
         <tbody>
           {data.map((value, index) => {
-            return <TableRow index={value.id} columns={columns} value={value} />;
+            return <TableRow key={value.id} columns={columns} value={value} />;
           })}
         </tbody>
       </table>

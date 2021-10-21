@@ -60,3 +60,34 @@ export const createCustomer = async (customer: ICustomer): Promise<ICustomer> =>
     throw new Error(message);
   }
 }
+
+
+export const updateCustomer = async (customer: ICustomer): Promise<ICustomer> => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+   try {
+    const { data } = await axios.put(`/api/customers/${customer.id}`, { customer }, config);
+    return data;
+  } catch (error) {
+    const message = error.response && error.response.data.error ? error.response.data.error : error.message;
+    throw new Error(message);
+  }
+}
+
+export const deleteCustomer = async (id: number): Promise<any> => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+   try {
+    const { data } = await axios.delete(`/api/customers/${id}` , config);
+    return data;
+  } catch (error) {
+    const message = error.response && error.response.data.error ? error.response.data.error : error.message;
+    throw new Error(message);
+  }
+}

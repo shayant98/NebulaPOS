@@ -13,7 +13,6 @@ const createOrder = async (req, res) => {
   const productArray = body.receipt.receiptItems.map((item) => {
     return { product_id: item.id, qty: item.qty };
   });
-  console.log(body.receipt);
   try {
     const order = await prisma.orders.create({
       data: {
